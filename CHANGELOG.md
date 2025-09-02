@@ -1,5 +1,21 @@
 # Changelog
 
+## v1.5.0
+
+[compare changes](https://github.com/holux-design/v-gsap-nuxt/compare/v1.4.4...v1.5.0)
+
+### 🚀 Enhancements
+
+- Expose ScrollTrigger and globalTimelines via composables ([aaef2bf](https://github.com/holux-design/v-gsap-nuxt/commit/aaef2bf))
+
+### 🏡 Chore
+
+- Settings.json update ([7f992bd](https://github.com/holux-design/v-gsap-nuxt/commit/7f992bd))
+
+### ❤️ Contributors
+
+- Harry Yaprakov <h@yaprakov.com>
+
 ## v1.4.4
 
 [compare changes](https://github.com/holux-design/v-gsap-nuxt/compare/v1.4.3...v1.4.4)
