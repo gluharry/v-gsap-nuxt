@@ -64,11 +64,12 @@ export const vGsapDirective = (
 
       await nextTick()
 
-      globalTimelines[el.dataset.gsapId] = prepareTimeline(
+      const timeline = prepareTimeline(
         el,
         binding,
         configOptions,
       )
+      globalTimelines[el.dataset.gsapId] = timeline
       el.dataset.gsapTimeline = true
 
       gsapContext.add(() => globalTimelines[el.dataset.gsapId])
@@ -104,17 +105,46 @@ export const vGsapDirective = (
         timeline = prepareTimeline(el, binding, configOptions)
       }
 
+      console.log(timeline)
       if (binding.modifiers.add) {
-        let order
-          = getValueFromModifier(binding, 'order-')
-          || getValueFromModifier(binding, 'suggestedOrder-')
-        if (binding.modifiers.withPrevious) order = '<'
+        // Use nextTick to ensure all parent components have completed their beforeMount phase
+        nextTick(() => {
+          let order
+            = getValueFromModifier(binding, 'order-')
+            || getValueFromModifier(binding, 'suggestedOrder-')
+          if (binding.modifiers.withPrevious) order = '<'
 
-        if (!el.closest(`[data-gsap-timeline="true"]`)?.dataset?.gsapId) return
+          // Try multiple approaches to find the parent timeline
+          let parentTimelineElement = el.closest(`[data-gsap-timeline="true"]`)
+          // If not found with data attribute, try finding by looking for timeline modifier in parent elements
+          if (!parentTimelineElement) {
+            let currentParent = el.parentElement
+            while (currentParent) {
+              if (currentParent.dataset.gsapId && globalTimelines[currentParent.dataset.gsapId]) {
+                parentTimelineElement = currentParent
+                break
+              }
+              currentParent = currentParent.parentElement
+            }
+          }
 
-        globalTimelines[
-          el.closest(`[data-gsap-timeline="true"]`).dataset.gsapId
-        ]?.add(timeline, order)
+          if (!parentTimelineElement?.dataset?.gsapId) {
+            return
+          }
+
+          // Use a retry mechanism to ensure parent timeline is ready
+          const addToParentTimeline = () => {
+            const parentTimeline = globalTimelines[parentTimelineElement.dataset.gsapId]
+            if (!parentTimeline) {
+              // Parent timeline not ready yet, retry after a short delay
+              setTimeout(addToParentTimeline, 10)
+              return
+            }
+            parentTimeline.add(timeline, order);
+          }
+          addToParentTimeline()
+        })
+        return // Exit early to avoid creating standalone timeline
       }
     }
 
