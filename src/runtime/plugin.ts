@@ -143,7 +143,7 @@ export const vGsapDirective = (
               setTimeout(addToParentTimeline, 10)
               return
             }
-            parentTimeline.add(timeline, order);
+            parentTimeline.add(timeline, order)
           }
           addToParentTimeline()
         })
@@ -197,27 +197,16 @@ function assignChildrenOrderAttributesFor(vnode, startOrder?): number {
 
 function prepareSplitText(el, binding) {
   if (binding.modifiers.splitText) {
-    // Determine the split type based on modifiers
+    // Determine the split type based on modifiers (only one type supported)
     let splitType = 'chars'
 
-    if (binding.modifiers.lines && binding.modifiers.words && binding.modifiers.chars) {
-      splitType = 'lines,words,chars'
-    }
-    else if (binding.modifiers.lines && binding.modifiers.words) {
-      splitType = 'lines,words'
-    }
-    else if (binding.modifiers.lines && binding.modifiers.chars) {
-      splitType = 'lines,chars'
-    }
-    else if (binding.modifiers.words && binding.modifiers.chars) {
-      splitType = 'words,chars'
-    }
-    else if (binding.modifiers.lines) {
+    if (binding.modifiers.lines) {
       splitType = 'lines'
     }
     else if (binding.modifiers.words) {
       splitType = 'words'
     }
+    // chars is default, no need to check
 
     // Additional options for SplitText
     const splitOptions = {
@@ -372,14 +361,11 @@ function prepareTimeline(el, binding, configOptions) {
   if (binding.modifiers.splitText && el._splitText) {
     // Determine which target to use based on modifiers
     // With or without mask, we always animate the text elements, not the masks
-    if (binding.modifiers.words && binding.modifiers.chars) {
-      animationTarget = el._splitText.chars // Default to chars if both are present
+    if (binding.modifiers.lines) {
+      animationTarget = el._splitText.lines
     }
     else if (binding.modifiers.words) {
       animationTarget = el._splitText.words
-    }
-    else if (binding.modifiers.lines) {
-      animationTarget = el._splitText.lines
     }
     else {
       animationTarget = el._splitText.chars // Default
@@ -397,6 +383,9 @@ function prepareTimeline(el, binding, configOptions) {
   delete binding.value?.scroller
   delete binding.value?.markers
   delete binding.value?.toggleActions
+
+  // Remove SplitText configuration from binding.value to prevent passing it to GSAP animations
+  delete binding.value?.splitText
 
   // Setup actual animation step // Respects stagger if set
   const animationType: ANIMATION_TYPES = Object.keys(binding.modifiers).find(

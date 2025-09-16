@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-col gap-y-16 p-16 w-[100vw]">
     <Container>
-      <h1 class="text-4xl font-bold" v-gsap.splitText.mask.lines.from="{ opacity: 0, y: 64 }">
+      <h1 class="text-4xl font-bold" v-gsap.splitText.mask.lines.stagger.from="{ opacity: 0, y: 64 }">
         The Quick Brown <br> Fox Jumps Over The Lazy Dog
       </h1>
     </Container>
