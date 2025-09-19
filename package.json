@@ -1,7 +1,7 @@
 {
-  "name": "v-gsap-nuxt",
-  "version": "1.4.4",
-  "description": "GSAP Directive for Nuxt 3",
+  "name": "@mrbubbaz/v-gsap-nuxt",
+  "version": "1.5.0",
+  "description": "GSAP Directive for Nuxt 3 with SplitText support",
   "repository": "holux-design/v-gsap-nuxt",
   "homepage": "https://v-gsap-nuxt.vercel.app",
   "contributors": [
