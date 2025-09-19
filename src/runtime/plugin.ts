@@ -108,7 +108,6 @@ export const vGsapDirective = (
         timeline = prepareTimeline(el, binding, configOptions)
       }
 
-      console.log(timeline)
       if (binding.modifiers.add) {
         // Use nextTick to ensure all parent components have completed their beforeMount phase
         nextTick(() => {
