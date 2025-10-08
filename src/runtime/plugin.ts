@@ -208,7 +208,7 @@ function prepareSplitText(el, binding) {
     // chars is default, no need to check
 
     // Additional options for SplitText
-    const splitOptions = {
+    const splitOptions: any = {
       type: splitType,
       ...binding.value?.splitText || {},
     }
@@ -227,11 +227,72 @@ function prepareSplitText(el, binding) {
       }
     }
 
-    // Create SplitText instance and save it to the element for later use
-    const splitText = new SplitText(el, splitOptions)
-    el._splitText = splitText
+    // Support onSplit callback from options
+    const onSplitCb = splitOptions.onSplit
+    // Whether to wait for custom fonts before final split (default: true)
+    const waitForFonts = splitOptions.waitForFonts !== false
 
-    return splitText
+    // Helper to create and store a SplitText instance
+    const doSplit = () => {
+      // Clean up any previous instance before re-splitting
+      if (el._splitText && typeof el._splitText.revert === 'function') {
+        try {
+          el._splitText.revert()
+        }
+        catch (e) {
+          /* noop */
+        }
+      }
+      const instance = new SplitText(el, splitOptions)
+      el._splitText = instance
+
+      // Fire user callback if provided
+      if (typeof onSplitCb === 'function') {
+        try {
+          onSplitCb({ el, split: instance })
+        }
+        catch (e) {
+          /* noop */
+        }
+      }
+      // Also dispatch a DOM event so users can listen without code changes
+      try {
+        el.dispatchEvent(new CustomEvent('vgsap:split', { detail: { el, split: instance } }))
+      }
+      catch (e) { /* noop */ }
+
+      // If there is a ScrollTrigger tied to this element, refresh it after splitting
+      try {
+        ScrollTrigger.getById?.(el.dataset.gsapId)?.refresh?.()
+      }
+      catch (e) {
+        /* noop */
+      }
+
+      return instance
+    }
+
+    // Perform an initial split immediately so downstream code has targets
+    const initialSplit = doSplit()
+
+    // If requested, perform a final split after fonts finish loading for accurate measurements
+    if (waitForFonts && typeof document !== 'undefined' && (document as any).fonts) {
+      try {
+        const fonts: any = (document as any).fonts
+        // If fonts aren't fully loaded yet, wait and re-split
+        const ready: Promise<any> = fonts.ready
+        if (ready && fonts.status !== 'loaded') {
+          ready.then(() => {
+            doSplit()
+          }).catch(() => {
+            // Ignore font load errors; keep initial split
+          })
+        }
+      }
+      catch (e) { /* noop */ }
+    }
+
+    return initialSplit
   }
 }
 
