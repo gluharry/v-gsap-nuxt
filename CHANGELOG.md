@@ -1,5 +1,19 @@
 # Changelog
 
+## v1.5.1
+
+[compare changes](https://github.com/holux-design/v-gsap-nuxt/compare/v1.5.0...v1.5.1)
+
+### 🏡 Chore
+
+- Enhance SplitText support with font loading, callbacks, and event dispatch ([bd61c10](https://github.com/holux-design/v-gsap-nuxt/commit/bd61c10))
+- Document new SplitText options, callbacks, and event handling in usage guides ([4ed5ddd](https://github.com/holux-design/v-gsap-nuxt/commit/4ed5ddd))
+- Add @nuxt/fonts to devDependencies and define custom font in main.css ([febb74e](https://github.com/holux-design/v-gsap-nuxt/commit/febb74e))
+
+### ❤️ Contributors
+
+- Simone Franchina <simone@italianonprofit.it>
+
 ## v1.5.0
 
 
