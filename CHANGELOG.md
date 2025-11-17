@@ -1,5 +1,32 @@
 # Changelog
 
+## v1.6.1
+
+[compare changes](https://github.com/holux-design/v-gsap-nuxt/compare/v1.5.1...v1.6.1)
+
+### 🏡 Chore
+
+- Update GSAP dependency to version 3.13.0 ([8733917](https://github.com/holux-design/v-gsap-nuxt/commit/8733917))
+- Add Tailwind CSS with Vite plugin integration into playground ([baf5897](https://github.com/holux-design/v-gsap-nuxt/commit/baf5897))
+- Refactor layout styles and update Tailwind CSS dependencies ([70c7548](https://github.com/holux-design/v-gsap-nuxt/commit/70c7548))
+- Add GSAP animations and Container component to playground layout ([b10984c](https://github.com/holux-design/v-gsap-nuxt/commit/b10984c))
+- Improve GSAP timeline management with parent search and retry mechanism ([c0d727a](https://github.com/holux-design/v-gsap-nuxt/commit/c0d727a))
+- Extend GSAP animations in playground and simplify directive usage ([27c8dce](https://github.com/holux-design/v-gsap-nuxt/commit/27c8dce))
+- Integrate SplitText into GSAP plugin and enhance animation directives ([9350880](https://github.com/holux-design/v-gsap-nuxt/commit/9350880))
+- Add SplitText examples and enhance documentation across usage, examples, and playground ([9ec2241](https://github.com/holux-design/v-gsap-nuxt/commit/9ec2241))
+- Aggiungi documentazione dettagliata per SplitText e aggiorna esempi nel playground ([92a9696](https://github.com/holux-design/v-gsap-nuxt/commit/92a9696))
+- Update GSAP plugins documentation to include SplitText (free since 3.13) ([415fb49](https://github.com/holux-design/v-gsap-nuxt/commit/415fb49))
+- Aggiorna nome del pacchetto e versione in package.json, aggiungendo supporto per SplitText ([885a82d](https://github.com/holux-design/v-gsap-nuxt/commit/885a82d))
+- **release:** V1.5.0 ([2fb939d](https://github.com/holux-design/v-gsap-nuxt/commit/2fb939d))
+- Enhance SplitText support with font loading, callbacks, and event dispatch ([bd61c10](https://github.com/holux-design/v-gsap-nuxt/commit/bd61c10))
+- Document new SplitText options, callbacks, and event handling in usage guides ([4ed5ddd](https://github.com/holux-design/v-gsap-nuxt/commit/4ed5ddd))
+- Add @nuxt/fonts to devDependencies and define custom font in main.css ([febb74e](https://github.com/holux-design/v-gsap-nuxt/commit/febb74e))
+- **release:** V1.5.1 ([a20dca2](https://github.com/holux-design/v-gsap-nuxt/commit/a20dca2))
+
+### ❤️ Contributors
+
+- Simone Franchina <simone@italianonprofit.it>
+
 ## v1.5.1
 
 [compare changes](https://github.com/holux-design/v-gsap-nuxt/compare/v1.5.0...v1.5.1)
