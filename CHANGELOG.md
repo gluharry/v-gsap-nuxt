@@ -1,5 +1,17 @@
 # Changelog
 
+## v1.6.4
+
+[compare changes](https://github.com/holux-design/v-gsap-nuxt/compare/v1.6.3...v1.6.4)
+
+### 🩹 Fixes
+
+- GSAPTransition delay ([4bfc356](https://github.com/holux-design/v-gsap-nuxt/commit/4bfc356))
+
+### ❤️ Contributors
+
+- Harry Yaprakov <h@yaprakov.com>
+
 ## v1.6.3
 
 [compare changes](https://github.com/holux-design/v-gsap-nuxt/compare/v1.6.1...v1.6.3)
