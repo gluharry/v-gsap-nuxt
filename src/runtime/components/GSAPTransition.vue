@@ -50,7 +50,7 @@ onMounted(() => {
 const onEnter = (element: El, done: () => void) => {
   useGSAP().from(element, {
     ...hidden.value,
-    delay: (props.delay || 0) + element.dataset.index * (props.stagger || 0),
+    delay: (props.delay || 0) + (element.dataset.index || 0) * (props.stagger || 0),
     duration: props.duration,
     onComplete: done,
   })
@@ -59,7 +59,7 @@ const onEnter = (element: El, done: () => void) => {
 const onLeave = (element: El, done: () => void) => {
   useGSAP().to(element, {
     ...hidden.value,
-    delay: (props.delay || 0) + element.dataset.index * (props.stagger || 0),
+    delay: (props.delay || 0) + (element.dataset.index || 0) * (props.stagger || 0),
     duration: props.duration,
     onComplete: done,
   })
